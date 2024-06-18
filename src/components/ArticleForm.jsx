@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import ArticleList from './ArticleList';
-import { Form, InputGroup, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Row, Col } from 'reactstrap';
 
 function ArticleForm() {
 
     const [articles, setArticles] = useState([]);
+
     const defaultArticleData = {
-        title: ''
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
     };
-
-
     const [articleData, setArticleData] = useState(defaultArticleData);
 
-    // Gestisce il submit del form
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        if (articleData.title.trim() !== '') {
-            setArticles(array => ([...array, articleData]));
-            // Resetta il form ai valori di default
+        if (articleData.firstName.trim() !== '') {
+            setArticles(array => ([...array, articleData]));          
             setArticleData(defaultArticleData);
         }
     };
@@ -34,26 +33,61 @@ function ArticleForm() {
     };
 
     return (
-        <>            
+        <>
             <Form onSubmit={handleSubmit}>
-                <InputGroup>                    
+                <Row>
+                    <Col>
+                        <FormGroup>
+                            <Label for="firstName">Nome</Label>
+                            <Input
+                                id="firstName"
+                                name="firstName"
+                                placeholder="Nome"
+                                type="text"
+                                value={articleData.firstName}
+                                onChange={(e) => changeArticleData('firstName', e.target.value)}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup>
+                            <Label for="lastName">Cognome</Label>
+                            <Input
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Cognome"
+                                type="text"
+                                value={articleData.lastName}
+                                onChange={(e) => changeArticleData('lastName', e.target.value)}
+                            />
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <FormGroup>
+                    <Label for="address">Indirizzo</Label>
                     <Input
-                        placeholder="and..."
-                        type="text"
-                        id="articleTitle"
-                        value={articleData.title}
-                        onChange={(e) => changeArticleData('title', e.target.value)}
+                        id="address"
+                        name="address"
+                        placeholder="Indirizzo"
+                        value={articleData.address}
+                        onChange={(e) => changeArticleData('address', e.target.value)}
                     />
-                    
-                    <Button type="submit" color="success">
-                        To the Right!
-                    </Button>
-                </InputGroup>
-
-                
-                <ArticleList articles={articles} removeArticle={removeArticle} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="city">Città</Label>
+                    <Input
+                        id="city"
+                        name="city"
+                        placeholder="Città"
+                        value={articleData.city}
+                        onChange={(e) => changeArticleData('city', e.target.value)}
+                    />
+                </FormGroup>
+                <Button type="submit" color="success">Add Article</Button>
             </Form>
-            
+
+
+            <ArticleList articles={articles} removeArticle={removeArticle} />
         </>
     );
 }

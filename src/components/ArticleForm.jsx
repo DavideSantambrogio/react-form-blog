@@ -46,6 +46,7 @@ function ArticleForm() {
                                 type="text"
                                 value={articleData.firstName}
                                 onChange={(e) => changeArticleData('firstName', e.target.value)}
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -59,6 +60,7 @@ function ArticleForm() {
                                 type="text"
                                 value={articleData.lastName}
                                 onChange={(e) => changeArticleData('lastName', e.target.value)}
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -71,6 +73,7 @@ function ArticleForm() {
                         placeholder="Indirizzo"
                         value={articleData.address}
                         onChange={(e) => changeArticleData('address', e.target.value)}
+                        required
                     />
                 </FormGroup>
                 <FormGroup>
@@ -81,6 +84,7 @@ function ArticleForm() {
                         placeholder="Città"
                         value={articleData.city}
                         onChange={(e) => changeArticleData('city', e.target.value)}
+                        required
                     />
                 </FormGroup>
                 <Button type="submit" color="success">Add Article</Button>
